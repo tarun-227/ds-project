@@ -1,0 +1,32 @@
+{
+  "ridge": {
+    "estimator__model__alpha": 3162.2776601683795
+  },
+  "random_forest": {
+    "estimator__model__min_samples_leaf": 40,
+    "estimator__model__max_features": 0.5,
+    "estimator__model__max_depth": 12
+  },
+  "lightgbm": {
+    "estimator__model__colsample_bytree": 0.7282672852414551,
+    "estimator__model__learning_rate": 0.016536379754545756,
+    "estimator__model__min_child_samples": 39,
+    "estimator__model__num_leaves": 18,
+    "estimator__model__objective": "l1",
+    "estimator__model__reg_lambda": 0.0030785897480259308,
+    "estimator__model__subsample": 0.7425191352307899,
+    "estimator__model__subsample_freq": 1
+  },
+  "logistic": {
+    "model__C": 0.01
+  },
+  "lightgbm_clf": {
+    "model__colsample_bytree": 0.9303652916281717,
+    "model__learning_rate": 0.010161366845302874,
+    "model__min_child_samples": 36,
+    "model__num_leaves": 16,
+    "model__reg_lambda": 0.08696007095406232,
+    "model__subsample": 0.8769744131561081,
+    "model__subsample_freq": 1
+  }
+}

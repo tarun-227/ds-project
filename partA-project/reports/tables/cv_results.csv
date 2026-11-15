@@ -1,0 +1,8 @@
+task,model,metric,cv_mean,cv_std
+regression,persistence,MAE,21.5331,4.4396
+regression,seasonal_mean,MAE,39.7828,11.7468
+regression,ridge,MAE,20.8231,4.3507
+regression,random_forest,MAE,20.6812,4.4914
+regression,lightgbm,MAE,20.1776,4.5438
+classification,logistic,PR-AUC,0.904,0.0093
+classification,lightgbm_clf,PR-AUC,0.9221,0.0115

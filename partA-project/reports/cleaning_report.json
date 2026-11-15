@@ -1,0 +1,190 @@
+{
+  "raw_rows": 29531,
+  "raw_columns": [
+    "City",
+    "Date",
+    "PM2.5",
+    "PM10",
+    "NO",
+    "NO2",
+    "NOx",
+    "NH3",
+    "CO",
+    "SO2",
+    "O3",
+    "Benzene",
+    "Toluene",
+    "Xylene",
+    "AQI",
+    "AQI_Bucket"
+  ],
+  "rows_missing_city_or_date": 0,
+  "duplicate_city_date_rows": 0,
+  "impossible_values_set_to_nan": {
+    "PM2.5": 0,
+    "PM10": 0,
+    "NO": 0,
+    "NO2": 0,
+    "NOx": 0,
+    "NH3": 0,
+    "CO": 120,
+    "SO2": 0,
+    "O3": 0,
+    "Benzene": 35,
+    "Toluene": 22,
+    "Xylene": 0
+  },
+  "calendar_rows_added": 0,
+  "offseason_spikes_set_to_nan": [
+    [
+      "Amritsar",
+      "2017-05-08",
+      "868.66"
+    ],
+    [
+      "Amritsar",
+      "2017-05-10",
+      "832.8"
+    ],
+    [
+      "Amritsar",
+      "2017-05-11",
+      "595.88"
+    ],
+    [
+      "Bengaluru",
+      "2017-07-08",
+      "313.59"
+    ],
+    [
+      "Gurugram",
+      "2017-07-09",
+      "821.42"
+    ],
+    [
+      "Gurugram",
+      "2017-07-16",
+      "812.49"
+    ],
+    [
+      "Gurugram",
+      "2017-07-30",
+      "858.73"
+    ],
+    [
+      "Gurugram",
+      "2017-08-29",
+      "949.99"
+    ],
+    [
+      "Gurugram",
+      "2017-08-30",
+      "643.71"
+    ],
+    [
+      "Guwahati",
+      "2019-05-04",
+      "916.67"
+    ],
+    [
+      "Hyderabad",
+      "2015-06-02",
+      "539.13"
+    ],
+    [
+      "Hyderabad",
+      "2015-06-24",
+      "467.67"
+    ],
+    [
+      "Hyderabad",
+      "2016-02-21",
+      "525.09"
+    ],
+    [
+      "Hyderabad",
+      "2016-06-15",
+      "363.14"
+    ],
+    [
+      "Hyderabad",
+      "2016-06-16",
+      "571.02"
+    ],
+    [
+      "Hyderabad",
+      "2016-07-11",
+      "357.85"
+    ]
+  ],
+  "missing_share_train": {
+    "PM2.5": 0.237,
+    "PM10": 0.543,
+    "NO": 0.18,
+    "NO2": 0.177,
+    "NOx": 0.196,
+    "NH3": 0.476,
+    "CO": 0.093,
+    "SO2": 0.191,
+    "O3": 0.197,
+    "Benzene": 0.219,
+    "Toluene": 0.249,
+    "Xylene": 0.61
+  },
+  "dropped_sparse_columns": [
+    "PM10",
+    "Xylene"
+  ],
+  "ffilled_values": {
+    "PM2.5": 522,
+    "NO": 602,
+    "NO2": 601,
+    "NOx": 392,
+    "NH3": 516,
+    "CO": 708,
+    "SO2": 685,
+    "O3": 711,
+    "Benzene": 647,
+    "Toluene": 575
+  },
+  "still_missing_after_ffill": {
+    "PM2.5": 4092,
+    "NO": 2980,
+    "NO2": 2984,
+    "NOx": 3793,
+    "NH3": 9812,
+    "CO": 1471,
+    "SO2": 3169,
+    "O3": 3311,
+    "Benzene": 5011,
+    "Toluene": 7488
+  },
+  "clean_rows": 29531,
+  "clean_columns": [
+    "Date",
+    "City",
+    "PM2.5",
+    "NO",
+    "NO2",
+    "NOx",
+    "NH3",
+    "CO",
+    "SO2",
+    "O3",
+    "Benzene",
+    "Toluene",
+    "AQI",
+    "AQI_Bucket",
+    "PM2.5_obs",
+    "PM2.5_was_missing",
+    "NO_was_missing",
+    "NO2_was_missing",
+    "NOx_was_missing",
+    "NH3_was_missing",
+    "CO_was_missing",
+    "SO2_was_missing",
+    "O3_was_missing",
+    "Benzene_was_missing",
+    "Toluene_was_missing"
+  ]
+}

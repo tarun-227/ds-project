@@ -1,0 +1,33 @@
+{
+  "best_regressor_by_val": "LightGBM",
+  "test_MAE_gain_vs_persistence_%": 10.01,
+  "test_gain_95CI": "[8.2, 11.7]",
+  "goal1_met (>= 15%)": false,
+  "best_classifier_by_val": "LightGBM regressor + threshold",
+  "test_recall": 0.748,
+  "test_precision": 0.742,
+  "goal2_met (recall>=0.80 & precision>=0.60)": false,
+  "test_MAE_cities_seen_in_training": 9.85,
+  "test_MAE_cities_new_in_2019_20": 7.94,
+  "lockdown": {
+    "2020 before lockdown": {
+      "MAE model": 12.39,
+      "MAE persistence": 13.97,
+      "mean PM2.5": 62.5,
+      "Poor+ rate": 0.176
+    },
+    "2020 lockdown onwards": {
+      "MAE model": 6.61,
+      "MAE persistence": 7.18,
+      "mean PM2.5": 28.2,
+      "Poor+ rate": 0.012
+    }
+  },
+  "val_2019_diwali_window": {
+    "n": 109,
+    "MAE model": 25.4,
+    "MAE persistence": 30.23
+  },
+  "test_median_residual": 1.27,
+  "test_mean_residual_on_Poor+_days": -10.28
+}

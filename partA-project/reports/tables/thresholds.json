@@ -1,0 +1,6 @@
+{
+  "persistence": 90.0,
+  "logistic": 0.5581712072946063,
+  "lightgbm_clf": 0.6994820330215843,
+  "lightgbm_reg_threshold": 88.50331424875466
+}

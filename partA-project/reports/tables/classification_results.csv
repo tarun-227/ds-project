@@ -1,0 +1,9 @@
+split,model,threshold,precision,recall,F1,PR-AUC,Poor+ rate
+val,Persistence rule (today > 90),90.0,0.788,0.787,0.787,0.858,0.169
+val,Logistic regression,0.558,0.773,0.799,0.786,0.87,0.169
+val,LightGBM classifier,0.699,0.81,0.799,0.805,0.888,0.169
+val,LightGBM regressor + threshold,88.503,0.81,0.799,0.805,0.885,0.169
+test,Persistence rule (today > 90),90.0,0.713,0.735,0.724,0.783,0.086
+test,Logistic regression,0.558,0.691,0.79,0.737,0.815,0.086
+test,LightGBM classifier,0.699,0.733,0.771,0.752,0.829,0.086
+test,LightGBM regressor + threshold,88.503,0.742,0.748,0.745,0.831,0.086

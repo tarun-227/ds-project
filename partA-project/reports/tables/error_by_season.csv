@@ -1,0 +1,8 @@
+split,season,model,persistence,n,mean_pm25
+test,monsoon,6.15,7.06,747,24.38
+test,summer,7.48,7.97,2273,33.35
+test,winter,13.59,15.52,1444,70.32
+val,monsoon,7.72,8.37,2326,30.93
+val,post_monsoon,15.9,17.28,1339,71.09
+val,summer,10.75,11.86,1677,54.28
+val,winter,17.53,19.81,1773,90.71

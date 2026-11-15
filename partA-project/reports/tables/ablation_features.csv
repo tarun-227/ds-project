@@ -1,0 +1,4 @@
+features,val_MAE,val_gain_vs_persistence_%,test_MAE,test_gain_vs_persistence_%
+pollution + calendar (no weather),12.86,6.3,9.54,7.1
++ today's weather (main model),12.42,9.5,9.23,10.0
+"+ tomorrow's actual weather (oracle forecast, upper bound)",11.89,13.3,8.84,13.8

@@ -1,0 +1,11 @@
+split,model,MAE,RMSE,MAE on Poor+ days,MAE gain vs persistence %,gain 95% CI
+val,Persistence (baseline),13.72,27.13,32.23,0.0,
+val,Seasonal mean (baseline),28.03,42.6,44.8,-104.35,
+val,Ridge,13.21,25.09,29.74,3.72,"[2.0, 5.4]"
+val,Random forest,13.08,25.15,29.7,4.62,"[3.0, 6.1]"
+val,LightGBM,12.42,24.28,29.68,9.47,"[7.7, 11.2]"
+test,Persistence (baseline),10.26,17.37,28.02,0.0,
+test,Seasonal mean (baseline),33.52,42.21,43.09,-226.66,
+test,Ridge,9.99,15.95,24.63,2.61,"[0.2, 4.8]"
+test,Random forest,9.8,15.67,24.95,4.53,"[2.8, 6.2]"
+test,LightGBM,9.23,14.99,24.74,10.01,"[8.2, 11.7]"
