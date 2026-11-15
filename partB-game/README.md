@@ -6,12 +6,19 @@ Nobody tells you the concept: you find it in the gap between the two numbers.
 
 ![Level 1 after an overfit submission](docs/screenshots/3_after_overfit_submit.png)
 
+*Screenshot from an earlier build of Level 1.*
+
 ## Run it
 ```bash
-pip install -r requirements.txt
-streamlit run app/main.py
+pip install -r requirements.txt     # Python 3.12
+streamlit run app/main.py           # opens http://localhost:8501
+python -m pytest -q                 # 8 tests
 ```
-Tests: `python -m pytest -q` (checks that every level loads and that the concepts come out of the computation).
+The tests check three things: every level loads; each concept comes out of the computation (test error rises at high degree; bias falls and variance rises with depth); and a headless play-through of both levels using Streamlit's `AppTest`.
+
+The game is self-contained: Level 2's data (`data/delhi_pm25.csv`) is committed. To rebuild it from Part A's raw data, run `python data/make_data.py`.
+
+If `streamlit` isn't on your PATH, use `python -m streamlit run app/main.py`. If port 8501 is busy, add `--server.port 8502`.
 
 ## How to play
 1. Type a nickname in the sidebar (it only labels the playtest log).
@@ -41,12 +48,24 @@ Nothing is hard-coded: the best score, stars and hints are all computed from the
 ## Code layout
 | Path | Purpose |
 |---|---|
-| `app/main.py` | Streamlit shell: sidebar, level unlocking, session state |
+| `app/main.py` | Streamlit shell: sidebar, level unlocking, session state; levels are cached across players |
+| `data/delhi_pm25.csv`, `data/make_data.py` | Level 2 data and the script that builds it |
 | `app/logger.py` | Writes every submit, resample and reflection to `playtest/logs/<session>.csv` |
 | `levels/base.py` | `Level` base class and state (attempts, submissions, reflection) |
 | `levels/level1_overfitting.py`, `levels/level2_bias_variance.py` | One module per level: pure computation methods (unit-tested) plus a `render()` UI method |
 | `tests/test_levels.py` | Concept tests, e.g. "test error rises at high degree", "bias falls and variance rises with depth", "hints react to the choice" |
+| `tests/test_app.py` | Headless UI test: plays through both levels with Streamlit's `AppTest` and deletes its own log afterwards |
 | `playtest/` | Protocol, pre/post quizzes, feedback form, logs, `analyze.py`, `REPORT.md` |
 
 ## Evidence of learning
-See [playtest/REPORT.md](playtest/REPORT.md): pre/post quiz scores, feedback ratings, what players chose (from the logs), their reflections, and one change made because of playtesting.
+| Step | File |
+|---|---|
+| 1. How to run a session (pre-quiz → play → post-quiz → feedback) | [playtest/PROTOCOL.md](playtest/PROTOCOL.md) |
+| 2. Quizzes and form | [quiz_pre.md](playtest/quiz_pre.md), [quiz_post.md](playtest/quiz_post.md), [answer_key.md](playtest/answer_key.md), [feedback_form.md](playtest/feedback_form.md) |
+| 3. Raw evidence | `playtest/logs/<session>.csv` (written automatically by the game), `playtest/quiz_results.csv` (filled in by hand) |
+| 4. Summary | `python playtest/analyze.py` → [playtest/summary.md](playtest/summary.md) |
+| 5. Final write-up | [playtest/REPORT.md](playtest/REPORT.md): pre/post scores, gameplay, reflections, feedback, the change made |
+
+**Status:** 1 peer session has been logged so far (`playtest/logs/4d12fffa.csv`: the player went degree 9 → 12 → 3 and earned ★★★ on the third try, which is the intended discovery path). The quiz and feedback results from at least 5 peers still need to be collected and written into `REPORT.md`.
+
+One change has already come from testing: Level 1's slider used to start at degree 1, which already earned ★★★, so a player could pass without discovering anything. It now starts at a tempting degree 10, which earns 0 stars.

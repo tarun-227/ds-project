@@ -22,13 +22,33 @@ The ranking (LightGBM > random forest > Ridge > persistence ≫ seasonal mean) i
 - Daily weather per city: [NASA POWER](https://power.larc.nasa.gov/) API (free, no key). It is cached in `data/raw/weather/`.
 
 ## Run
+
 ```bash
 pip install -r requirements.txt     # Python 3.12, pinned versions
-python -m src.run_all               # download → clean → weather → features → train → evaluate → notebooks (~12 min)
+python -m src.run_all               # everything, ~12 min
 python -m pytest -q                 # 11 tests
 python -m src.build_report          # report.md → report.html + report.pdf (uses headless Chrome/Edge)
 ```
-Each step also runs on its own, e.g. `python -m src.train`. Use `python -m src.run_all --no-eda` to skip re-running the notebooks, or `--only-eda` to re-run only the notebooks (they need the pipeline outputs).
+
+`run_all` runs these steps in order. Each step can also be run on its own (all commands are run from `partA-project/`):
+
+| # | Command | What it does | Output | Time |
+|---|---|---|---|---|
+| 1 | `python -m src.download_data` | Downloads `city_day.csv` via the Kaggle API and validates its columns and row count | `data/raw/city_day.csv` | < 1 min |
+| 2 | `python -m src.clean` | Applies the cleaning rules and records every change | `data/processed/city_day_clean.csv`, `reports/cleaning_report.json` | seconds |
+| 3 | `python -m src.weather` | Downloads daily weather for 26 cities (cached) | `data/processed/weather_daily.csv` | ~1 min the first time |
+| 4 | `python -m src.features` | Builds 34 features plus the next-day target and assigns the split | `data/processed/features.csv` | seconds |
+| 5 | `python -m src.train` | Time-series CV tuning → validate 2019 → refit → test 2020, plus classifiers and the ablation | `models/*.joblib`, `reports/tables/predictions.csv`, `cv_results.csv`, … | ~8 min |
+| 6 | `python -m src.evaluate` | Comparison tables, bootstrap CIs, goal check, error analysis, figures | `reports/tables/*.csv`, `summary.json`, `reports/figures/*.png` | ~1 min |
+| 7 | (in `run_all`) | Executes `notebooks/01–03` in place | executed notebooks | ~1 min |
+
+Flags: `--no-eda` skips step 7; `--only-eda` runs only step 7 (it needs steps 1–6 to have run).
+
+**Without a Kaggle token:** download `city_day.csv` from the dataset page and put it in `data/raw/`; step 1 then just validates it.
+
+### Key figures
+<p><img src="reports/figures/model_comparison.png" width="49%"> <img src="reports/figures/pr_curves.png" width="49%"></p>
+<p><img src="reports/figures/error_by_city_test.png" width="40%"> <img src="reports/figures/residuals_over_time.png" width="58%"></p>
 
 ## Layout
 | Path | Purpose |
@@ -43,6 +63,7 @@ Each step also runs on its own, e.g. `python -m src.train`. Use `python -m src.r
 | `src/run_all.py`, `src/build_report.py` | End-to-end runner; PDF builder |
 | `notebooks/` | 01 EDA · 02 modelling · 03 evaluation, executed in place by `run_all` |
 | `tests/` | Cleaning rules, no future leakage in features, split and CV-fold ordering |
+| `models/` | Saved fitted models (generated, not committed) |
 | `reports/tables/`, `reports/figures/` | Every number and figure in the report |
 
 ## Leakage guards

@@ -3,5 +3,15 @@
 _No quiz results yet: fill in playtest/quiz_results.csv._
 
 
-_No game logs yet in playtest/logs/._
+## Gameplay from logs (1 sessions)
+
+| player   | level       |   submissions | choices (in order)   |   first stars |   best stars |
+|:---------|:------------|--------------:|:---------------------|--------------:|-------------:|
+| srujan   | overfitting |             3 | 9 → 12 → 3           |             0 |            3 |
+
+
+Reading the choices column: a player who moves from an extreme (degree 15, depth 12) towards the middle after the reveal has discovered the concept by playing.
+
+
+## Reflections (players' own words)
 
