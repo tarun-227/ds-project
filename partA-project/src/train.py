@@ -41,7 +41,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from src.config import (
-    CV_FOLDS, FEATURE_FILE, GOAL_RECALL, MODELS, POOR_THRESHOLD, SEED, TABLES,
+    CV_FOLDS, FEATURE_FILE, GOAL_RECALL, MODELS, N_JOBS, POOR_THRESHOLD, SEED, TABLES,
 )
 from src.features import (
     CATEGORICAL_FEATURES, FEATURES, NEXT_WEATHER_FEATURES, NUMERIC_FEATURES,
@@ -126,11 +126,11 @@ def regression_searches():
         ("prep", preprocessor(scale=True)), ("model", Ridge())]))
     rf = DeltaTarget(Pipeline([
         ("prep", preprocessor(scale=False)),
-        ("model", RandomForestRegressor(n_estimators=150, random_state=SEED, n_jobs=-1)),
+        ("model", RandomForestRegressor(n_estimators=150, random_state=SEED, n_jobs=1)),
     ]))
     lgbm = DeltaTarget(Pipeline([
         ("prep", preprocessor(scale=False)),
-        ("model", LGBMRegressor(random_state=SEED, n_estimators=500, verbose=-1)),
+        ("model", LGBMRegressor(random_state=SEED, n_estimators=500, verbose=-1, n_jobs=1)),
     ]))
     p = "estimator__model__"
     return [
@@ -160,7 +160,7 @@ def classification_searches():
     ])
     lgbm = Pipeline([
         ("prep", preprocessor(scale=False)),
-        ("model", LGBMClassifier(random_state=SEED, n_estimators=400, verbose=-1,
+        ("model", LGBMClassifier(random_state=SEED, n_estimators=400, verbose=-1, n_jobs=1,
                                  is_unbalance=True)),
     ])
     return [
@@ -179,9 +179,9 @@ def classification_searches():
 
 def make_search(est, grid, n_iter, folds, scoring):
     if n_iter is None:
-        return GridSearchCV(est, grid, cv=folds, scoring=scoring, n_jobs=-1)
+        return GridSearchCV(est, grid, cv=folds, scoring=scoring, n_jobs=N_JOBS)
     return RandomizedSearchCV(est, grid, n_iter=n_iter, cv=folds, scoring=scoring,
-                              random_state=SEED, n_jobs=-1)
+                              random_state=SEED, n_jobs=N_JOBS)
 
 
 def threshold_for_recall(y_true, score, target_recall=GOAL_RECALL) -> float:

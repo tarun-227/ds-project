@@ -2,6 +2,7 @@
 
 Every other module imports from here so a single change propagates everywhere.
 """
+import os
 from pathlib import Path
 
 # ---------------------------------------------------------------- paths
@@ -64,6 +65,9 @@ FEATURE_FILE = DATA_PROCESSED / "features.csv"
 MODELS = ROOT / "models"
 TABLES = REPORTS / "tables"
 CV_FOLDS = 5
+# Parallelism lives at ONE level (the hyperparameter search). Models inside it are
+# single-threaded; nesting all-core jobs oversubscribes the CPU and can kill workers.
+N_JOBS = max(1, (os.cpu_count() or 2) - 1)
 # Goals stated in the report introduction (checked in evaluate.py).
 GOAL_MAE_IMPROVEMENT = 0.15   # >= 15% lower MAE than persistence on test
 GOAL_RECALL = 0.80

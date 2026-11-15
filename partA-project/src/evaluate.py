@@ -33,7 +33,7 @@ from sklearn.metrics import (
 
 from src.config import (
     FEATURE_FILE, FIGURES, GOAL_MAE_IMPROVEMENT, GOAL_PRECISION, GOAL_RECALL,
-    MODELS, SEED, TABLES,
+    MODELS, N_JOBS, SEED, TABLES,
 )
 from src.features import FEATURES
 
@@ -218,7 +218,7 @@ def fig_permutation_importance(feats):
     model = joblib.load(MODELS / "reg_lightgbm_trainonly.joblib")
     va = feats[feats.split == "val"]
     r = permutation_importance(model, va[FEATURES], va["y"], scoring="neg_mean_absolute_error",
-                               n_repeats=5, random_state=SEED, n_jobs=-1)
+                               n_repeats=5, random_state=SEED, n_jobs=N_JOBS)
     imp = pd.DataFrame({"feature": FEATURES, "MAE increase": r.importances_mean,
                         "std": r.importances_std}).sort_values("MAE increase", ascending=False)
     # pm_t is both a feature and the base the model adds its correction to, so shuffling
